@@ -3,6 +3,7 @@ package net.sherafatpour.mastercleanarchitecture_mvvm.data.dto.CoinListDTO
 
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import net.sherafatpour.mastercleanarchitecture_mvvm.domain.model.Coin
 
 @Keep
 data class CoinListDTOItem(
@@ -58,4 +59,15 @@ data class CoinListDTOItem(
     val totalSupply: Double?, // 120163084.110252
     @SerializedName("total_volume")
     val totalVolume: Double? // 713.03
-)
+){
+    fun toCoin():Coin=Coin(
+        id =id ,
+        name = name,
+        image = image,
+        marketCap = marketCap,
+        price = currentPrice,
+        pricePercentageChange = priceChangePercentage24h,
+        lowPrice = low24h,
+        highPrice = high24h
+    )
+}

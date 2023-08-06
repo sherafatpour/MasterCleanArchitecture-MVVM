@@ -3,6 +3,7 @@ package net.sherafatpour.mastercleanarchitecture_mvvm.data.dto.CoinDetailDTO
 
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import net.sherafatpour.mastercleanarchitecture_mvvm.domain.model.CoinDetail
 
 @Keep
 data class CoinDetailDTO(
@@ -74,4 +75,16 @@ data class CoinDetailDTO(
     val tickers: List<Ticker?>?,
     @SerializedName("watchlist_portfolio_users")
     val watchlistPortfolioUsers: Int? // 1324931
-)
+) {
+
+    fun toCoinDetail(): CoinDetail = CoinDetail(
+        name = name,
+        image = image?.large,
+        marketCap = marketData?.marketCap?.usd?.toDouble(),
+        price = marketData?.low24h?.usd?.toDouble(),
+        pricePercentageChange = marketData?.priceChangePercentage24h,
+        lowPrice = marketData?.low24h?.usd?.toDouble(),
+        highPrice = marketData?.high24h?.usd?.toDouble(),
+        description = description?.en.toString()
+    )
+}
